@@ -90,8 +90,6 @@ export default function Register() {
         </p>
 
 
-
-  
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
