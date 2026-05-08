@@ -4,8 +4,7 @@ import type { AxiosError } from "axios";
 import { login } from "../APi/login";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
-
-
+import { setLocalStorageToken } from "../utils/LocalStorage";
 
 export default function useLogin() {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function useLogin() {
   return useMutation<LoginResponse, AxiosError<ApiError>, UserInfo>({
     mutationFn: login,
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
+      setLocalStorageToken(data.token);
       navigate("/");
       toast.success(`${data.message}`, {
         position: "bottom-right",
@@ -27,9 +26,9 @@ export default function useLogin() {
         transition: Bounce,
       });
     },
-      onError: (error)=>{
-  toast.error(`${error.message}`,{
-            position: "bottom-right",
+    onError: (error) => {
+      toast.error(`${error.message}`, {
+        position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
@@ -38,7 +37,7 @@ export default function useLogin() {
         progress: undefined,
         theme: "light",
         transition: Bounce,
-     })
-    }
+      });
+    },
   });
 }

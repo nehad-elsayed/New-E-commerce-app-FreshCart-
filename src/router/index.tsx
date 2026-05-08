@@ -11,6 +11,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Cart from "../pages/Cart";
 import WishList from "../pages/WishList";
+import ProtectedAuthRoutes from "../guards/protectedAuthRoutes";
+import ProtectedRoutes from "../guards/ProtectedRoutes";
+import AllOrders from "../pages/AllOrders";
 
 const routeConfig: RouteObject[] = [
   {
@@ -39,19 +42,44 @@ const routeConfig: RouteObject[] = [
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <ProtectedAuthRoutes>
+            <Login />
+          </ProtectedAuthRoutes>
+        ),
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <ProtectedAuthRoutes>
+            <Register />
+          </ProtectedAuthRoutes>
+        ),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <ProtectedRoutes>
+            {" "}
+            <Cart />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/wishList",
-        element: <WishList />,
+        element: (
+          <ProtectedRoutes>
+            <WishList />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/allorders",
+        element: (
+          <ProtectedRoutes>
+            <AllOrders />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "*",

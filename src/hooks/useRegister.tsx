@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../APi/register";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { setLocalStorageToken } from "../utils/LocalStorage";
 
 export default function useRegister() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function useRegister() {
   return useMutation({
     mutationFn: signUp,
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
+      setLocalStorageToken(data.token);
       navigate("/");
       toast.success("success", {
         position: "bottom-right",
@@ -23,9 +24,9 @@ export default function useRegister() {
         transition: Bounce,
       });
     },
-    onError: (error)=>{
-     toast.error(`${error.message}`,{
-            position: "bottom-right",
+    onError: (error) => {
+      toast.error(`${error.message}`, {
+        position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
@@ -34,7 +35,7 @@ export default function useRegister() {
         progress: undefined,
         theme: "light",
         transition: Bounce,
-     })
-    }
+      });
+    },
   });
 }
