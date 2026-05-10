@@ -5,6 +5,7 @@ import ProtectedAuthRoutes from "../guards/protectedAuthRoutes";
 import ProtectedRoutes from "../guards/ProtectedRoutes";
 import Page from "../components/Page/Page";
 
+
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Categories = lazy(() => import("../pages/Categories"));
