@@ -1,22 +1,7 @@
 import ProductCard from "../../components/ProductCard/ProductCard";
-import { Bounce, toast } from "react-toastify";
-import Loadingscreen from "../../components/LoadingScreen/Loadingscreen";
 import useProducts from "../../hooks/useProducts";
-
 export default function Products() {
-  const { data: products, isLoading, isError } = useProducts();
-
-  if (isLoading) {
-    return <Loadingscreen />;
-  }
-
-  if (isError) {
-    toast.error("There is an error fetching products", {
-      position: "bottom-right",
-      transition: Bounce,
-    });
-    return <h3 className="text-center text-red-500">Error loading products</h3>;
-  }
+  const { data: products } = useProducts();
 
   return (
     <div>

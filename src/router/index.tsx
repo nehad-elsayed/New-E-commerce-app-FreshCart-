@@ -14,37 +14,68 @@ import WishList from "../pages/WishList";
 import ProtectedAuthRoutes from "../guards/protectedAuthRoutes";
 import ProtectedRoutes from "../guards/ProtectedRoutes";
 import AllOrders from "../pages/AllOrders";
-
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "../components/ErrorBoundary/ErrorFallback";
 const routeConfig: RouteObject[] = [
   {
     path: "/",
     element: (
-      <Suspense fallback={<Loadingscreen />}>
-        <Layout />
-      </Suspense>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<Loadingscreen />}>
+          <Layout />
+        </Suspense>
+      </ErrorBoundary>
     ),
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<Loadingscreen />}>
+              <Home />
+            </Suspense>
+          </ErrorBoundary>
+        ),
       },
       {
         path: "/categories",
-        element: <Categories />,
+        element: (
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<Loadingscreen />}>
+              <Categories />
+            </Suspense>
+          </ErrorBoundary>
+        ),
       },
       {
         path: "/brands",
-        element: <Brands />,
+        element: (
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<Loadingscreen />}>
+              <Brands />
+            </Suspense>
+          </ErrorBoundary>
+        ),
       },
       {
         path: "/products",
-        element: <Products />,
+        element: (
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<Loadingscreen />}>
+              <Products />
+            </Suspense>
+          </ErrorBoundary>
+        ),
       },
       {
         path: "/login",
         element: (
           <ProtectedAuthRoutes>
-            <Login />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loadingscreen />}>
+                <Login />
+              </Suspense>
+            </ErrorBoundary>
           </ProtectedAuthRoutes>
         ),
       },
@@ -52,7 +83,11 @@ const routeConfig: RouteObject[] = [
         path: "/register",
         element: (
           <ProtectedAuthRoutes>
-            <Register />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loadingscreen />}>
+                <Register />
+              </Suspense>
+            </ErrorBoundary>
           </ProtectedAuthRoutes>
         ),
       },
@@ -60,8 +95,11 @@ const routeConfig: RouteObject[] = [
         path: "/cart",
         element: (
           <ProtectedRoutes>
-            {" "}
-            <Cart />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loadingscreen />}>
+                <Cart />
+              </Suspense>
+            </ErrorBoundary>
           </ProtectedRoutes>
         ),
       },
@@ -69,7 +107,11 @@ const routeConfig: RouteObject[] = [
         path: "/wishList",
         element: (
           <ProtectedRoutes>
-            <WishList />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loadingscreen />}>
+                <WishList />
+              </Suspense>
+            </ErrorBoundary>
           </ProtectedRoutes>
         ),
       },
@@ -77,7 +119,11 @@ const routeConfig: RouteObject[] = [
         path: "/allorders",
         element: (
           <ProtectedRoutes>
-            <AllOrders />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loadingscreen />}>
+                <AllOrders />
+              </Suspense>
+            </ErrorBoundary>
           </ProtectedRoutes>
         ),
       },
