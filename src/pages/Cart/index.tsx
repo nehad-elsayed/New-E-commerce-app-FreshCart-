@@ -1,9 +1,9 @@
 export default function Cart() {
   return (
     <div>
-                <title>Cart</title>
+      <title>Cart</title>
 
-      <h1>Cart PAge</h1>
+      <h2 className="font-bold text-primary-dark text-lg md:text-4xl">Your Cart</h2>
     </div>
   );
 }

@@ -3,7 +3,8 @@ import Products from "../Products";
 export default function Home() {
   return (
     <div className="flex flex-col gap-4 mt-1">
-      <h1 className="text-center text-primary">Fresh Cart</h1>
+      <h2 className="font-bold text-primary-dark text-lg md:text-5xl">FreshCArt</h2>
+
       <Products />
     </div>
   );
