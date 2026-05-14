@@ -2,7 +2,8 @@
 export default function WishList() {
   return (
     <div>
-      <h1> wishlist </h1>
+           <title>WishList</title>
+<h2>wishlist</h2>
     </div>
   )
 }

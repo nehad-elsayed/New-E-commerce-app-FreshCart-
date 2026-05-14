@@ -71,14 +71,16 @@ export default function Register() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12">
+            <title>Register</title>
+
       <div className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
         {/* ── Brand ── */}
         <div className="mb-7 flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-light">
             <img src={freshCartLogo} alt="" className=" w-auto" />
           </div>
           <span className="text-lg font-semibold tracking-tight text-gray-900">
-            Fresh<span className="text-green-500">Cart</span>
+            Fresh<span className="text-primary">Cart</span>
           </span>
         </div>
 
@@ -226,7 +228,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={isPending || isSuccess}
-            className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-green-500 text-sm font-medium text-white transition hover:bg-green-600 active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-green-300"
+            className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-primary-light text-sm font-medium text-white transition hover:bg-green-600 active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-green-300"
           >
             {isPending ? (
               <>
@@ -262,7 +264,7 @@ export default function Register() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-medium text-green-600 hover:underline"
+            className="font-medium text-primary hover:underline"
           >
             Sign in
           </Link>

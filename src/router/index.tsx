@@ -3,9 +3,8 @@ import { lazy } from "react";
 import Layout from "../components/Layout/Layout";
 import ProtectedAuthRoutes from "../guards/protectedAuthRoutes";
 import ProtectedRoutes from "../guards/ProtectedRoutes";
-import Page from "../components/Page/Page";
-
-
+import PageBoundary from "../components/Page/Page";
+//lazy bta5od arrow function returns el import bta3 elcomponent
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Categories = lazy(() => import("../pages/Categories"));
@@ -21,50 +20,50 @@ const routeConfig: RouteObject[] = [
   {
     path: "/",
     element: (
-      <Page>
+      <PageBoundary>
         <Layout />
-      </Page>
+      </PageBoundary>
     ),
     children: [
       {
         index: true,
         element: (
-          <Page>
+          <PageBoundary>
             <Home />
-          </Page>
+          </PageBoundary>
         ),
       },
       {
         path: "/categories",
         element: (
-          <Page>
+          <PageBoundary>
             <Categories />
-          </Page>
+          </PageBoundary>
         ),
       },
       {
         path: "/brands",
         element: (
-          <Page>
+          <PageBoundary>
             <Brands />
-          </Page>
+          </PageBoundary>
         ),
       },
       {
         path: "/products",
         element: (
-          <Page>
+          <PageBoundary>
             <Products />
-          </Page>
+          </PageBoundary>
         ),
       },
       {
         path: "/login",
         element: (
           <ProtectedAuthRoutes>
-            <Page>
+            <PageBoundary>
               <Login />
-            </Page>
+            </PageBoundary>
           </ProtectedAuthRoutes>
         ),
       },
@@ -72,9 +71,9 @@ const routeConfig: RouteObject[] = [
         path: "/register",
         element: (
           <ProtectedAuthRoutes>
-            <Page>
+            <PageBoundary>
               <Register />
-            </Page>
+            </PageBoundary>
           </ProtectedAuthRoutes>
         ),
       },
@@ -82,9 +81,9 @@ const routeConfig: RouteObject[] = [
         path: "/cart",
         element: (
           <ProtectedRoutes>
-            <Page>
+            <PageBoundary>
               <Cart />
-            </Page>
+            </PageBoundary>
           </ProtectedRoutes>
         ),
       },
@@ -92,9 +91,9 @@ const routeConfig: RouteObject[] = [
         path: "/wishList",
         element: (
           <ProtectedRoutes>
-            <Page>
+            <PageBoundary>
               <WishList />
-            </Page>
+            </PageBoundary>
           </ProtectedRoutes>
         ),
       },
@@ -102,18 +101,18 @@ const routeConfig: RouteObject[] = [
         path: "/allorders",
         element: (
           <ProtectedRoutes>
-            <Page>
+            <PageBoundary>
               <AllOrders />
-            </Page>
+            </PageBoundary>
           </ProtectedRoutes>
         ),
       },
       {
         path: "*",
         element: (
-          <Page>
+          <PageBoundary>
             <NotFound />
-          </Page>
+          </PageBoundary>
         ),
       },
     ],

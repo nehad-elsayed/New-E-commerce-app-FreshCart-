@@ -97,7 +97,7 @@ function Avatar({ src, name }: { src?: string; name?: string }) {
       <img
         src={src}
         alt={name ?? "User"}
-        className="size-8 rounded-full object-cover ring-2 ring-green-400 ring-offset-1"
+        className="size-8 rounded-full object-cover ring-2 ring-primary-light ring-offset-1"
       />
     );
   }
@@ -108,7 +108,7 @@ function Avatar({ src, name }: { src?: string; name?: string }) {
     .toUpperCase()
     .slice(0, 2);
   return (
-    <span className="flex size-8 items-center justify-center rounded-full bg-green-100 text-xs font-bold text-green-700 ring-2 ring-green-400 ring-offset-1">
+    <span className="flex size-8 items-center justify-center rounded-full bg-green-100 text-xs font-bold text-primary-dark ring-2 ring-primary-light ring-offset-1">
       {initials}
     </span>
   );
@@ -198,11 +198,11 @@ export default function Navbar({
           className="flex shrink-0 items-center gap-2.5"
           onClick={() => setIsMenuOpen(false)}
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500 shadow-sm">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
             <img src={freshCartLogo} alt="freshCartLogo" />
           </div>
           <span className="text-lg font-bold tracking-tight text-gray-900">
-            Fresh<span className="text-green-500">Cart</span>
+            Fresh<span className="text-primary">Cart</span>
           </span>
         </NavLink>
 
@@ -225,7 +225,7 @@ export default function Navbar({
               <NavLink
                 to="/wishList"
                 className={({ isActive }) =>
-                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-green-600 bg-green-50" : "text-gray-500 hover:text-green-600 hover:bg-green-50"}`
+                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-primary-light bg-green-50" : "text-gray-500 hover:text-primary-dark hover:bg-green-50"}`
                 }
                 aria-label="Wishlist"
               >
@@ -237,7 +237,7 @@ export default function Navbar({
               <NavLink
                 to="/cart"
                 className={({ isActive }) =>
-                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-green-600 bg-green-50" : "text-gray-500 hover:text-green-600 hover:bg-green-50"}`
+                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-primary bg-green-50" : "text-gray-500 hover:text-primary-dark hover:bg-green-50"}`
                 }
                 aria-label="Cart"
               >
@@ -247,7 +247,7 @@ export default function Navbar({
 
               {/* User Dropdown */}
               <Menu as="div" className="relative">
-                <MenuButton className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-green-500">
+                <MenuButton className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-primary-light">
                   <Avatar src={userAvatar} name={userName} />
                   <span className="max-w-25 truncate text-sm font-medium text-gray-700">
                     {userName.split(" ")[0]}
@@ -336,7 +336,7 @@ export default function Navbar({
             <>
               <NavLink
                 to="/wishList"
-                className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-green-600"
+                className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-primary"
                 aria-label="Wishlist"
               >
                 <HeartIcon className="h-5 w-5" />
@@ -344,7 +344,7 @@ export default function Navbar({
               </NavLink>
               <NavLink
                 to="/cart"
-                className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-green-600"
+                className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-primary"
                 aria-label="Cart"
               >
                 <CartIcon className="h-5 w-5" />
@@ -459,14 +459,14 @@ export default function Navbar({
               </p>
               <NavLink
                 to="/login"
-                className="flex w-full items-center rounded-xl px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-green-600"
+                className="flex w-full items-center rounded-xl px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Log in
               </NavLink>
               <NavLink
                 to="/register"
-                className="flex w-full items-center justify-center rounded-xl bg-green-500 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-600"
+                className="flex w-full items-center justify-center rounded-xl bg-primary-light px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Create an account
@@ -481,109 +481,3 @@ export default function Navbar({
     </nav>
   );
 }
-// import { NavLink, useNavigate } from "react-router-dom";
-// import { useContext, useState } from "react";
-// import { AuthContext } from "../../contexts/AuthContext"; // تأكد من المسار الصحيح
-// import freshCartLogo from "../../assets/FreshCartLogo.png";
-
-// export default function Navbar() {
-//   const { token, setToken } = useContext(AuthContext);
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const navigate = useNavigate();
-
-//   // تحويل التوكن إلى قيمة منطقية (Boolean)
-//   const isLoggedIn = !!token;
-
-//   const handleLogout = () => {
-//     setToken(null); // سيقوم بتنظيف التوكن من الـ State والـ LocalStorage تلقائياً عبر Provider
-//     setIsMenuOpen(false);
-//     navigate("/login");
-//   };
-
-//   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-//     `text-sm font-medium transition-colors hover:text-green-600 ${
-//       isActive ? "text-green-600 font-bold" : "text-gray-600"
-//     }`;
-
-//   return (
-//     <nav className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md shadow-sm">
-//       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        
-//         {/* --- Logo --- */}
-//         <NavLink to="/" className="flex items-center gap-2">
-//           <img src={freshCartLogo} alt="Logo" className="h-8 w-auto" />
-//           <span className="text-xl font-bold text-gray-900">Fresh<span className="text-green-500">Cart</span></span>
-//         </NavLink>
-
-//         {/* --- Desktop Links (Left side) --- */}
-//         {isLoggedIn && (
-//           <ul className="hidden items-center gap-6 md:flex ml-10">
-//             <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
-//             <li><NavLink to="/products" className={navLinkClass}>Products</NavLink></li>
-//             <li><NavLink to="/categories" className={navLinkClass}>Categories</NavLink></li>
-//             <li><NavLink to="/brands" className={navLinkClass}>Brands</NavLink></li>
-//             <li><NavLink to="/allorders" className={navLinkClass}>Orders</NavLink></li>
-//           </ul>
-//         )}
-
-//         {/* --- Desktop Auth/Actions (Right side) --- */}
-//         <div className="hidden items-center gap-4 md:flex">
-//           {isLoggedIn ? (
-//             <>
-//               {/* تظهر فقط للمسجلين */}
-//               <NavLink to="/cart" className="text-gray-600 hover:text-green-600 relative">
-//                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-//                 </svg>
-//               </NavLink>
-//               <button 
-//                 onClick={handleLogout}
-//                 className="text-sm font-medium text-red-600 hover:text-red-700 cursor-pointer"
-//               >
-//                 Sign Out
-//               </button>
-//             </>
-//           ) : (
-//             <div className="flex items-center gap-3">
-//               {/* تظهر فقط إذا لم يكن هناك توكن */}
-//               <NavLink to="/login" className="text-sm font-medium text-gray-600 hover:text-green-600">
-//                 Login
-//               </NavLink>
-//               <NavLink to="/register" className="rounded-lg bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 transition-all">
-//                 Register
-//               </NavLink>
-//             </div>
-//           )}
-//         </div>
-
-//         {/* --- Mobile Hamburger --- */}
-//         <button 
-//           className="md:hidden p-2 text-gray-600"
-//           onClick={() => setIsMenuOpen(!isMenuOpen)}
-//         >
-//           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-//           </svg>
-//         </button>
-//       </div>
-
-//       {/* --- Mobile Menu --- */}
-//       {isMenuOpen && (
-//         <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-3">
-//           {isLoggedIn ? (
-//             <>
-//               <NavLink to="/" className="block text-gray-600" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
-//               <NavLink to="/cart" className="block text-gray-600" onClick={() => setIsMenuOpen(false)}>Cart</NavLink>
-//               <button onClick={handleLogout} className="block w-full text-left text-red-600">Sign Out</button>
-//             </>
-//           ) : (
-//             <>
-//               <NavLink to="/login" className="block text-gray-600" onClick={() => setIsMenuOpen(false)}>Login</NavLink>
-//               <NavLink to="/register" className="block text-green-600 font-bold" onClick={() => setIsMenuOpen(false)}>Register</NavLink>
-//             </>
-//           )}
-//         </div>
-//       )}
-//     </nav>
-//   );
-// }
