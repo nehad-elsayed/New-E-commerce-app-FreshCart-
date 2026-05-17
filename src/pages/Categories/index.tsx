@@ -11,10 +11,10 @@ export default function Categories() {
         {data.map((category: Category) => (
           <div
             key={category._id}
-            className="p-3 bg-slate-200 rounded-lg flex flex-col justify-between"
+            className="p-3  rounded-lg flex flex-col justify-between"
           >
             <img className="rounded-lg min-h-[90%]" src={category.image} alt={category.name} />
-            <h2 className="p-1 animate__animated animate__bounceInDown text-lg font-bold bg-white dark:bg-sky-900 text-black dark:text-slate-100 rounded-md">
+            <h2 className="p-1 animate__animated animate__bounceInDown text-lg font-bold bg-primary dark:bg-primary-dark  text-slate-100 rounded-md">
               {category.name}
             </h2>
           </div>
