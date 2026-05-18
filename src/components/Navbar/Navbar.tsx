@@ -90,33 +90,32 @@ function Badge({ count }: { count: number }) {
 
 // ─── Avatar ───────────────────────────────────────────────────────────────────
 
-function Avatar({ src, name }: { src?: string; name?: string }) {
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt={name ?? "User"}
-        className="size-8 rounded-full object-cover ring-2 ring-primary-light ring-offset-1"
-      />
-    );
-  }
-  const initials = (name ?? "U")
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-  return (
-    <span className="flex size-8 items-center justify-center rounded-full bg-green-100 text-xs font-bold text-primary-dark ring-2 ring-primary-light ring-offset-1">
-      {initials}
-    </span>
-  );
-}
+// function Avatar({ src, name }: { src?: string; name?: string }) {
+//   if (src) {
+//     return (
+//       <img
+//         src={src}
+//         alt={name ?? "User"}
+//         className="size-8 rounded-full object-cover ring-2 ring-primary-light ring-offset-1"
+//       />
+//     );
+//   }
+//   const initials = (name ?? "U")
+//     .split(" ")
+//     .map((w) => w[0])
+//     .join("")
+//     .toUpperCase()
+//     .slice(0, 2);
+//   return (
+//     <span className="flex size-8 items-center justify-center rounded-full bg-green-100 text-xs font-bold text-primary-dark ring-2 ring-primary-light ring-offset-1">
+//       {initials}
+//     </span>
+//   );
+// }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 interface NavbarProps {
-  /** Inject from auth context in a real app */
   initialLoggedIn?: boolean;
   cartCount?: number;
   wishlistCount?: number;
@@ -128,7 +127,6 @@ export default function Navbar({
   cartCount = 3,
   wishlistCount = 5,
   userName = "John Doe",
-  userAvatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -247,7 +245,6 @@ export default function Navbar({
               {/* User Dropdown */}
               <Menu as="div" className="relative">
                 <MenuButton className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-primary-light">
-                  <Avatar src={userAvatar} name={userName} />
                   <span className="max-w-25 truncate text-sm font-medium text-gray-700">
                     {userName.split(" ")[0]}
                   </span>
@@ -266,36 +263,18 @@ export default function Navbar({
                   transition
                   className="absolute right-0 z-20 mt-2 w-52 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 transition data-closed:scale-95 data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                 >
-                  <div className="px-4 py-3">
-                    <p className="text-xs text-gray-500">Signed in as</p>
-                    <p className="truncate text-sm font-semibold text-gray-800">{userName}</p>
-                  </div>
+                 
                   <div className="py-1">
                     <MenuItem>
                       <NavLink
-                        to="/profile"
+                        to="/userprofile"
                         className="flex items-center gap-2.5 px-4 py-2 text-sm text-gray-700 transition-colors data-focus:bg-gray-50 data-focus:text-gray-900"
                       >
                         <UserIcon className="h-4 w-4 text-gray-400" />
                         Your Profile
                       </NavLink>
                     </MenuItem>
-                    {/* <MenuItem>
-                      <NavLink
-                        to="/login"
-                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-gray-700 transition-colors data-focus:bg-gray-50 data-focus:text-gray-900"
-                      >
-                        Sign In
-                      </NavLink>
-                    </MenuItem>
-                    <MenuItem>
-                      <NavLink
-                        to="/register"
-                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-gray-700 transition-colors data-focus:bg-gray-50 data-focus:text-gray-900"
-                      >
-                        Sign Up
-                      </NavLink>
-                    </MenuItem> */}
+          
                   </div>
                   <div className="py-1">
                     <MenuItem>
@@ -427,7 +406,6 @@ export default function Navbar({
 
               {/* User info */}
               <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
-                <Avatar src={userAvatar} name={userName} />
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-gray-800">{userName}</p>
                   <p className="text-xs text-gray-500">View profile</p>
