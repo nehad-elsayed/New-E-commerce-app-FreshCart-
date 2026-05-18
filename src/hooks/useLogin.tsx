@@ -5,14 +5,18 @@ import { login } from "../APi/login";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
 import { setLocalStorageToken } from "../utils/LocalStorage";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function useLogin() {
   const navigate = useNavigate();
-
+  const { setToken } = useContext(AuthContext);
   return useMutation<LoginResponse, AxiosError<ApiError>, UserInfo>({
     mutationFn: login,
     onSuccess: (data) => {
       setLocalStorageToken(data.token);
+      setToken(data.token);
+
       navigate("/");
       toast.success(`${data.message}`, {
         position: "bottom-right",

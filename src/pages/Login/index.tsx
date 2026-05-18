@@ -53,11 +53,9 @@ export default function LoginPage() {
           </span>
         </div>
 
-        {/* ── Heading ── */}
         <h1 className="mb-1 text-xl font-semibold text-gray-900">Welcome back</h1>
-        <p className="mb-6 text-sm text-gray-500">Sign in to your account to continue</p>
+        <p className="mb-6 text-sm text-gray-500">Sign in to continue</p>
 
-        {/* ── Success Banner ── */}
         {isSuccess && (
           <div className="mb-5 flex items-center gap-2.5 rounded-lg border border-green-200 bg-green-50 px-3 py-2.5 text-sm text-green-700">
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -71,7 +69,6 @@ export default function LoginPage() {
           </div>
         )}
 
-        {/* ── API Error Banner ── */}
         {apiErrorMessage && (
           <div className="mb-5 flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-sm text-red-600">
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -86,7 +83,7 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
-          {/* ── Email ── */}
+        
           <div>
             <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-600">
               Email address
@@ -126,7 +123,6 @@ export default function LoginPage() {
             {errors.email && <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>}
           </div>
 
-          {/* ── Password ── */}
           <div>
             <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-gray-600">
               Password
@@ -176,16 +172,9 @@ export default function LoginPage() {
             )}
           </div>
 
-          {/* ── Remember + Forgot ── */}
+        
           <div className="flex items-center justify-between">
-            <label className="flex cursor-pointer select-none items-center gap-2 text-sm text-gray-500">
-              <input
-                type="checkbox"
-                {...register("remember")}
-                className="h-3.5 w-3.5 cursor-pointer accent-green-500"
-              />
-              Remember me
-            </label>
+          
             <Link
               to="/forgot-password"
               className="text-sm font-medium text-green-500 hover:underline"
@@ -194,7 +183,7 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          {/* ── Submit ── */}
+         
           <button
             type="submit"
             disabled={isPending || isSuccess}

@@ -6,6 +6,6 @@ export default function useCategories() {
   return useSuspenseQuery<Category[]>({
     queryKey: ["categories"],
     queryFn: getCategories,
-    refetchInterval: 10000000,
+    
   });
 }
