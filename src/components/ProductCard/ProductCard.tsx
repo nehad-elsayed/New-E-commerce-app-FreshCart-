@@ -5,8 +5,9 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       {/* product image */}
-      <Link to="#">
+      <Link to={`/prouductDetails/${product._id}`}>
         <img
+          
           className="p-2 rounded-lg border-0  object-cover h-64 w-full"
           src={product.imageCover}
           alt={product.title}

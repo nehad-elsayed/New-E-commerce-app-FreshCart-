@@ -60,7 +60,7 @@ const routeConfig: RouteObject[] = [
         ),
       },
       {
-        path: "/productDetails",
+        path: `/prouductDetails/:id`,
         element: (
           <PageBoundary>
             <ProductDetails />

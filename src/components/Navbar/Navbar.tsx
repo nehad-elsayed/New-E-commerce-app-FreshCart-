@@ -88,9 +88,6 @@ function Badge({ count }: { count: number }) {
   );
 }
 
-
-
-
 interface NavbarProps {
   initialLoggedIn?: boolean;
   cartCount?: number;
@@ -238,7 +235,6 @@ export default function Navbar({
                   transition
                   className="absolute right-0 z-20 mt-2 w-52 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 transition data-closed:scale-95 data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                 >
-                 
                   <div className="py-1">
                     <MenuItem>
                       <NavLink
@@ -249,7 +245,6 @@ export default function Navbar({
                         Your Profile
                       </NavLink>
                     </MenuItem>
-          
                   </div>
                   <div className="py-1">
                     <MenuItem>
@@ -292,7 +287,7 @@ export default function Navbar({
                 className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-primary"
                 aria-label="Wishlist"
               >
-                <HeartIcon className="h-5 w-5" />
+                <HeartIcon className="h-5 w-5 `${isActive?}`" />
                 <Badge count={wishlistCount} />
               </NavLink>
               <NavLink
@@ -441,7 +436,7 @@ export default function Navbar({
 // import { useContext } from "react";
 // import { AuthContext } from "../../contexts/AuthContext";
 // export default function Navbar() {
-  
+
 //   const { token,setToken } = useContext(AuthContext);
 //   const navigate = useNavigate();
 
