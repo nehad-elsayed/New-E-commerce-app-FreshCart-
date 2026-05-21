@@ -16,6 +16,7 @@ const Cart = lazy(() => import("../pages/Cart"));
 const WishList = lazy(() => import("../pages/WishList"));
 const AllOrders = lazy(() => import("../pages/AllOrders"));
 const UserProfile = lazy(() => import("../pages/UserProfile"));
+const ProductDetails = lazy(() => import("../pages/ProductDetails"));
 
 const routeConfig: RouteObject[] = [
   {
@@ -55,6 +56,14 @@ const routeConfig: RouteObject[] = [
         element: (
           <PageBoundary>
             <Products />
+          </PageBoundary>
+        ),
+      },
+      {
+        path: "/productDetails",
+        element: (
+          <PageBoundary>
+            <ProductDetails />
           </PageBoundary>
         ),
       },

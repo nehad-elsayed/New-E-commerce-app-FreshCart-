@@ -88,32 +88,8 @@ function Badge({ count }: { count: number }) {
   );
 }
 
-// ─── Avatar ───────────────────────────────────────────────────────────────────
 
-// function Avatar({ src, name }: { src?: string; name?: string }) {
-//   if (src) {
-//     return (
-//       <img
-//         src={src}
-//         alt={name ?? "User"}
-//         className="size-8 rounded-full object-cover ring-2 ring-primary-light ring-offset-1"
-//       />
-//     );
-//   }
-//   const initials = (name ?? "U")
-//     .split(" ")
-//     .map((w) => w[0])
-//     .join("")
-//     .toUpperCase()
-//     .slice(0, 2);
-//   return (
-//     <span className="flex size-8 items-center justify-center rounded-full bg-green-100 text-xs font-bold text-primary-dark ring-2 ring-primary-light ring-offset-1">
-//       {initials}
-//     </span>
-//   );
-// }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
 
 interface NavbarProps {
   initialLoggedIn?: boolean;
@@ -214,7 +190,6 @@ export default function Navbar({
           ))}
         </ul>
 
-        {/* ── Desktop Right Section ── */}
         <div className="hidden items-center gap-2 md:flex">
           {isLoggedIn ? (
             <>
@@ -222,7 +197,7 @@ export default function Navbar({
               <NavLink
                 to="/wishList"
                 className={({ isActive }) =>
-                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-primary-light bg-green-50" : "text-gray-500 hover:text-primary-dark hover:bg-green-50"}`
+                  `relative rounded-lg p-2 transition-colors ${isActive ? "text-red-500 bg-green-50" : "text-gray-500 hover:text-primary-dark hover:bg-green-50"}`
                 }
                 aria-label="Wishlist"
               >
