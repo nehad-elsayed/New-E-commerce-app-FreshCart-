@@ -14,7 +14,7 @@ export default function Categories() {
             className="p-3  rounded-lg flex flex-col justify-between"
           >
             <img className="rounded-lg min-h-[90%]" src={category.image} alt={category.name} />
-            <h2 className="p-1 animate__animated animate__bounceInDown text-lg font-bold bg-primary dark:bg-primary-dark  text-slate-100 rounded-md">
+            <h2 className="p-1 text-center animate__animated animate__bounceInDown text-lg font-bold bg-primary dark:bg-primary-dark  text-slate-100 rounded-md">
               {category.name}
             </h2>
           </div>
