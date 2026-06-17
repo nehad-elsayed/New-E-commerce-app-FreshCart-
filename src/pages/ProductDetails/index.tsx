@@ -19,13 +19,16 @@ export default function ProductDetails() {
             alt="product_photo"
           />
           <div className="flex flex-col justify-between md:p-4 leading-normal">
-            <h5 className="mb-2 text-xs md:text-2xl font-bold tracking-tight text-heading">
+            <h5 className="mb-2 text-xs md:text-xl text-slate-500 font-bold tracking-tight text-heading">
               {productDetails.title}
             </h5>
+            <h5 className="mb-2 text-xs md:text-2xl text-primary-dark font-bold tracking-tight text-heading">
+              {productDetails.category.name}
+            </h5>
 
-            <p className="my-2 text-center md:text-start">{productDetails.description}</p>
+            <p className="my-2 text text-center md:text-start">{productDetails.description}</p>
             <div className="flex flex-wrap justify-between ">
-              <AddToCartButton />
+              <AddToCartButton productId={productDetails._id} />
               <AddToWishlistButton />
             </div>
           </div>

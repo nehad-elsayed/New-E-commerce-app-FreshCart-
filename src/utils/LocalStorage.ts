@@ -1,4 +1,4 @@
-const TOKEN_KEY = " fresh cart token";
+const TOKEN_KEY = "freshCartToken";
 
 export function getLocalStorageToken() {
   return localStorage.getItem(TOKEN_KEY);

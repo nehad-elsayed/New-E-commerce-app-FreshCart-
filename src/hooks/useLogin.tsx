@@ -16,7 +16,6 @@ export default function useLogin() {
     onSuccess: (data) => {
       setLocalStorageToken(data.token);
       setToken(data.token);
-
       navigate("/");
       toast.success(`${data.message}`, {
         position: "bottom-right",
