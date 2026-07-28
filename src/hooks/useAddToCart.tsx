@@ -1,14 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AddToCart } from "../APi/AddToCart";
 import { toast } from "react-toastify";
 
 export default function useAddToCart() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["addToCart"],
     mutationFn: (productId: string) => AddToCart(productId),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cartProducts"] });
       toast.success("Product added to cart!", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 2000,
       });
     },
