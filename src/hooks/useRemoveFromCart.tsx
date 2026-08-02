@@ -1,36 +1,25 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AddToCart } from "../APi/AddToCart";
+import { removeFromCart } from "../APi/removeFromCart";
 import { toast } from "react-toastify";
 
-export default function useAddToCart() {
+export default function useRemoveFromCart() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["addToCart"],
-    mutationFn: (productId: string) => AddToCart(productId),
+    mutationKey: ["removeFromCart"],
+    mutationFn: (productId: string) => removeFromCart(productId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cartProducts"] });
-      toast.success("Product added to cart!", {
+      toast.success("Product removed from cart", {
         position: "bottom-right",
         autoClose: 2000,
       });
     },
     onError: () => {
-      toast.error("Failed to add product, please try again!", {
-        position: "top-center",
+      toast.error("Failed to remove product", {
+        position: "bottom-right",
         autoClose: 2000,
-      
       });
-
     },
-
   });
-
 }
-
-
-
-
-
-
-

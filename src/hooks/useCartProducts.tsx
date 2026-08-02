@@ -8,5 +8,10 @@ export default function useCartProducts() {
     queryKey: ["cartProducts"],
     queryFn: getCartProducts,
     staleTime: 100000,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    refetchOnReconnect: true,
+    refetchInterval: 10000,
+    refetchIntervalInBackground: true,
   });
 }

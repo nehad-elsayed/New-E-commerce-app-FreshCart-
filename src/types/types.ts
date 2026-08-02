@@ -77,24 +77,24 @@ export interface Data {
   totalCartPrice: number;
 }
 
+export interface CartProductDetails {
+  subcategory: Subcategory[];
+  _id: string;
+  title: string;
+  quantity: number;
+  imageCover: string;
+  category: Category;
+  brand: Brand;
+  ratingsAverage: number;
+  id: string;
+}
+
 export interface Product2 {
   count: number;
   _id: string;
-  product: string;
+  product: CartProductDetails;
   price: number;
 }
-
-// export interface Product3 {
-//   subcategory: Subcategory[];
-//   _id: string;
-//   title: string;
-//   quantity: number;
-//   imageCover: string;
-//   category: Category;
-//   brand: Brand;
-//   ratingsAverage: number;
-//   id: string;
-// }
 
 export interface Subcategory {
   _id: string;

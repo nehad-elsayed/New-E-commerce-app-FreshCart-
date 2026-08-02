@@ -1,36 +1,25 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AddToCart } from "../APi/AddToCart";
+import { clearCart } from "../APi/clearCart";
 import { toast } from "react-toastify";
 
-export default function useAddToCart() {
+export default function useClearCart() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["addToCart"],
-    mutationFn: (productId: string) => AddToCart(productId),
+    mutationKey: ["clearCart"],
+    mutationFn: () => clearCart(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cartProducts"] });
-      toast.success("Product added to cart!", {
+      toast.success("Cart cleared", {
         position: "bottom-right",
         autoClose: 2000,
       });
     },
     onError: () => {
-      toast.error("Failed to add product, please try again!", {
-        position: "top-center",
+      toast.error("Failed to clear cart", {
+        position: "bottom-right",
         autoClose: 2000,
-      
       });
-
     },
-
   });
-
 }
-
-
-
-
-
-
-
