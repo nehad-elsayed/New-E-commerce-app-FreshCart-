@@ -3,68 +3,74 @@ import type { Product } from "../../types/types";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 
-const ProductCard = ({ product }: { product: Product }) => {
+function StarIcon({ className }: { className?: string }) {
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-      {/* product image */}
-      <Link to={`/prouductDetails/${product._id}`}>
-        <img
-          className="p-2 rounded-lg border-0  object-cover h-64 w-full"
-          src={product.imageCover}
-          alt={product.title}
-        />
-      </Link>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+  );
+}
 
-      <div className="px-5 pb-5">
-        {/* Title */}
-        <Link to="#">
-          <h5 className="text-xl font-stretch-50%  font-semibold tracking-tight text-gray-900 ">
-            {product.title || "Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport"}
-          </h5>
+const ProductCard = ({ product }: { product: Product }) => {
+  const detailsPath = `/prouductDetails/${product._id}`;
+
+  return (
+    <article className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-md">
+      <div className="relative overflow-hidden bg-gray-50">
+        <Link to={detailsPath} className="block aspect-square">
+          <img
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            src={product.imageCover}
+            alt={product.title}
+            loading="lazy"
+          />
         </Link>
 
-        {/* rating section */}
-        <div className="flex items-center mt-2.5 mb-5">
-          {/* <div className="flex items-center space-x-1 rtl:space-x-reverse">
-            {[...Array(4)].map((_, i) => (
-              // <svg
-              //   key={i}
-              //   className="w-4 h-4 text-yellow-300"
-              //   aria-hidden="true"
-              //   xmlns="http://www.w3.org/2000/svg"
-              //   fill="currentColor"
-              //   viewBox="0 0 22 20"
-              // >
-              //   <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              // </svg>
-            ))}
-            <svg
-              className="w-4 h-4 text-gray-200 dark:text-gray-600"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-          </div> */}
-        </div>
-        <div className="flex justify-between ">
-          <span className=" text-xl md:text-3xl font-bold font-stretch-50% ">
-            {product.price} EGP
-          </span>
-          <span>
-            <i className="fas fa-star"></i>
-            {product.ratingsAverage}
-          </span>
-        </div>
-        {/* price and action */}
-        <div className="flex my-2 items-center gap-1 md:justify-between">
-          <AddToCartButton productId={product._id} />
+        <div className="absolute right-3 top-3">
           <AddToWishlistButton />
         </div>
+
+        {product.category?.name && (
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-primary-dark shadow-sm backdrop-blur-sm">
+            {product.category.name}
+          </span>
+        )}
       </div>
-    </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        {product.brand?.name && (
+          <p className="text-[11px] font-medium uppercase tracking-wider text-gray-400">
+            {product.brand.name}
+          </p>
+        )}
+
+        <Link to={detailsPath} className="block">
+          <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-5 text-gray-900 transition group-hover:text-primary">
+            {product.title}
+          </h3>
+        </Link>
+
+        <div className="mt-auto flex items-center justify-between gap-2">
+          <p className="text-lg font-bold text-primary-dark">
+            {product.price.toLocaleString()}
+            <span className="ml-1 text-xs font-semibold text-gray-400">EGP</span>
+          </p>
+
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-600">
+            <StarIcon className="h-3.5 w-3.5" />
+            {product.ratingsAverage?.toFixed(1) ?? "—"}
+          </span>
+        </div>
+
+        <AddToCartButton productId={product._id} className="w-full" />
+      </div>
+    </article>
   );
 };
 

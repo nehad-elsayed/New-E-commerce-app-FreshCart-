@@ -25,6 +25,8 @@ export interface Root {
 }
 export interface Product {
   ratingsQuantity?: number;
+  sold?: number;
+  images?: string[];
   _id: string;
   title?: string;
   slug: string;
