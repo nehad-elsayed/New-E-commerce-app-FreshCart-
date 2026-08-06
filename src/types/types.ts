@@ -118,3 +118,46 @@ export interface Brand {
   slug: string;
   image: string;
 }
+
+export interface OrderShippingAddress {
+  details: string;
+  phone: string;
+  city: string;
+}
+
+export type ShippingAddress = OrderShippingAddress;
+
+export interface OrderCartItem {
+  count: number;
+  _id: string;
+  product: CartProductDetails;
+  price: number;
+}
+
+export interface UserOrder {
+  _id: string;
+  id?: number;
+  shippingAddress?: OrderShippingAddress;
+  taxPrice?: number;
+  shippingPrice?: number;
+  totalOrderPrice?: number;
+  paymentMethodType?: string;
+  isPaid?: boolean;
+  isDelivered?: boolean;
+  cartItems?: OrderCartItem[];
+  createdAt?: string;
+  updatedAt?: string;
+  user?: User;
+  paidAt?: string;
+}
+export interface User {
+  _id: string
+  name: string
+  email: string
+  phone?: string
+}
+
+
+
+
+

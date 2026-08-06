@@ -1,9 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import freshCartLogo from "../../assets/FreshCartLogo.png";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { removeLocalStorageToken } from "../../utils/LocalStorage";
+import useCartProducts from "../../hooks/useCartProducts";
 
 const navigationMenu = [
   { path: "/", label: "Home" },
@@ -88,19 +89,18 @@ function Badge({ count }: { count: number }) {
   );
 }
 
+function CartBadge() {
+  const { data: cartProducts } = useCartProducts();
+  return <Badge count={cartProducts?.numOfCartItems ?? 0} />;
+}
+
 interface NavbarProps {
   initialLoggedIn?: boolean;
-  cartCount?: number;
   wishlistCount?: number;
-  userName?: string;
   userAvatar?: string;
 }
 
-export default function Navbar({
-  cartCount = 3,
-  wishlistCount = 5,
-  userName = "John Doe",
-}: NavbarProps) {
+export default function Navbar({ wishlistCount = 5 }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { token, setToken } = useContext(AuthContext) as {
@@ -211,24 +211,18 @@ export default function Navbar({
                 aria-label="Cart"
               >
                 <CartIcon className="h-5 w-5" />
-                <Badge count={cartCount} />
+                <Suspense fallback={null}>
+                  <CartBadge />
+                </Suspense>
               </NavLink>
 
               {/* User Dropdown */}
               <Menu as="div" className="relative">
-                <MenuButton className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-primary-light">
-                  <span className="max-w-25 truncate text-sm font-medium text-gray-700">
-                    {userName.split(" ")[0]}
-                  </span>
-                  <svg
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
+                <MenuButton
+                  className="flex items-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-green-50 hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary-light"
+                  aria-label="Account menu"
+                >
+                  <UserIcon className="h-5 w-5" />
                 </MenuButton>
 
                 <MenuItems
@@ -296,7 +290,9 @@ export default function Navbar({
                 aria-label="Cart"
               >
                 <CartIcon className="h-5 w-5" />
-                <Badge count={cartCount} />
+                <Suspense fallback={null}>
+                  <CartBadge />
+                </Suspense>
               </NavLink>
             </>
           )}
@@ -374,16 +370,8 @@ export default function Navbar({
                 Account
               </p>
 
-              {/* User info */}
-              <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-gray-800">{userName}</p>
-                  <p className="text-xs text-gray-500">View profile</p>
-                </div>
-              </div>
-
               <NavLink
-                to="/profile"
+                to="/userprofile"
                 className={mobileNavLinkClass}
                 onClick={() => setIsMenuOpen(false)}
               >

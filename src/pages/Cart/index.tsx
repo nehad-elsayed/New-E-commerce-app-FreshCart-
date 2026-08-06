@@ -5,43 +5,18 @@ import useUpdateCartQuantity from "../../hooks/useUpdateCartQuantity";
 import useRemoveFromCart from "../../hooks/useRemoveFromCart";
 import useClearCart from "../../hooks/useClearCart";
 import CartItem from "../../components/CartItem/CartItem";
+import EmptyCart from "../../components/EmptyCart/EmptyCart";
 
-
-function EmptyCart() {
-  return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-gray-50/80 px-6 py-16 text-center">
-      <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-50">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-10 w-10 text-primary"
-          aria-hidden
-        >
-          <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-        </svg>
-      </div>
-      <h3 className="text-xl font-semibold text-gray-900">Your cart is empty</h3>
-      <p className="mt-2 max-w-sm text-sm text-gray-500">
-        Looks like you haven&apos;t added anything yet. Browse products and start shopping.
-      </p>
-      <Link
-        to="/products"
-        className="mt-6 inline-flex items-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
-      >
-        Continue Shopping
-      </Link>
-    </div>
-  );
-}
 
 
 export default function Cart() {
   const { data: cart, refetch } = useCartProducts();
-  const { mutate: updateQuantity, isPending: isUpdating, variables: updateVars } =
-    useUpdateCartQuantity();
-  const { mutate: removeItem, isPending: isRemoving, variables: removeId } =
-    useRemoveFromCart();
+  const {
+    mutate: updateQuantity,
+    isPending: isUpdating,
+    variables: updateVars,
+  } = useUpdateCartQuantity();
+  const { mutate: removeItem, isPending: isRemoving, variables: removeId } = useRemoveFromCart();
   const { mutate: clear, isPending: isClearing } = useClearCart();
 
   useEffect(() => {
@@ -104,9 +79,7 @@ export default function Cart() {
             <dl className="mt-5 space-y-3 text-sm">
               <div className="flex items-center justify-between text-gray-600">
                 <dt>Subtotal ({itemCount} items)</dt>
-                <dd className="font-medium text-gray-900">
-                  {totalPrice.toLocaleString()} EGP
-                </dd>
+                <dd className="font-medium text-gray-900">{totalPrice.toLocaleString()} EGP</dd>
               </div>
               <div className="flex items-center justify-between text-gray-600">
                 <dt>Shipping</dt>
@@ -122,12 +95,12 @@ export default function Cart() {
               </div>
             </dl>
 
-            <button
-              type="button"
-              className="mt-6 w-full rounded-xl bg-primary py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
+            <Link
+              to={`/address/${cart?.cartId || cart?.data?._id}`}
+              className="mt-6 block w-full rounded-xl bg-primary py-3.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-primary-dark"
             >
               Proceed to Checkout
-            </button>
+            </Link>
 
             <Link
               to="/products"
