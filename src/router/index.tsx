@@ -15,7 +15,6 @@ const Register = lazy(() => import("../pages/Register"));
 const Cart = lazy(() => import("../pages/Cart"));
 const WishList = lazy(() => import("../pages/WishList"));
 const AllOrders = lazy(() => import("../pages/AllOrders"));
-const UserProfile = lazy(() => import("../pages/UserProfile"));
 const ProductDetails = lazy(() => import("../pages/ProductDetails"));
 const Address = lazy(() => import("../pages/Address/Address"));
 const routeConfig: RouteObject[] = [
@@ -117,18 +116,7 @@ const routeConfig: RouteObject[] = [
           </ProtectedRoutes>
         ),
       },
-      {
-        path: "/userprofile",
-        element: (
-          <ProtectedRoutes>
-            <PageBoundary>
-              <UserProfile />
-            </PageBoundary>
-          </ProtectedRoutes>
-        ),
-      },
-
-
+  
 
       {
         path: "/address/:cartId",

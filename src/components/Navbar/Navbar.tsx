@@ -1,7 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import freshCartLogo from "../../assets/FreshCartLogo.png";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { removeLocalStorageToken } from "../../utils/LocalStorage";
 import useCartProducts from "../../hooks/useCartProducts";
@@ -39,24 +38,6 @@ function CartIcon({ className }: { className?: string }) {
       aria-hidden
     >
       <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-    </svg>
-  );
-}
-
-function UserIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-      aria-hidden
-    >
-      <path
-        fillRule="evenodd"
-        d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-        clipRule="evenodd"
-      />
     </svg>
   );
 }
@@ -216,43 +197,13 @@ export default function Navbar() {
                 </Suspense>
               </NavLink>
 
-              {/* User Dropdown */}
-              <Menu as="div" className="relative">
-                <MenuButton
-                  className="flex items-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-green-50 hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-primary-light"
-                  aria-label="Account menu"
-                >
-                  <UserIcon className="h-5 w-5" />
-                </MenuButton>
-
-                <MenuItems
-                  transition
-                  className="absolute right-0 z-20 mt-2 w-52 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 transition data-closed:scale-95 data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                >
-                  <div className="py-1">
-                    <MenuItem>
-                      <NavLink
-                        to="/userprofile"
-                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-gray-700 transition-colors data-focus:bg-gray-50 data-focus:text-gray-900"
-                      >
-                        <UserIcon className="h-4 w-4 text-gray-400" />
-                        Your Profile
-                      </NavLink>
-                    </MenuItem>
-                  </div>
-                  <div className="py-1">
-                    <MenuItem>
-                      <button
-                        onClick={logout}
-                        className="flex w-full cursor-pointer items-center gap-2.5 px-4 py-2 text-sm text-red-600 transition-colors data-focus:bg-red-50"
-                      >
-                        <LogoutIcon className="h-4 w-4" />
-                        Sign out
-                      </button>
-                    </MenuItem>
-                  </div>
-                </MenuItems>
-              </Menu>
+              <button
+                onClick={logout}
+                className="flex w-full cursor-pointer items-center gap-2.5 px-4 py-2 text-sm text-red-600 transition-colors data-focus:bg-red-50"
+              >
+                <LogoutIcon className="h-4 w-4" />
+                Sign out
+              </button>
             </>
           ) : (
             <div className="flex items-center gap-2">
@@ -272,7 +223,6 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* ── Mobile Right: Icons + Hamburger ── */}
         <div className="flex items-center gap-1 md:hidden">
           {isLoggedIn && (
             <>
@@ -365,20 +315,8 @@ export default function Navbar() {
 
           {/* Auth section */}
           {isLoggedIn ? (
-            <>
-              <p className="px-4 pb-1 text-[10px] font-semibold uppercase tracking-widest text-gray-400">
-                Account
-              </p>
-
-              <NavLink
-                to="/userprofile"
-                className={mobileNavLinkClass}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <UserIcon className="mr-2 h-4 w-4 text-gray-400" />
-                Your Profile
-              </NavLink>
-
+         
+         <>
               <button
                 onClick={logout}
                 className="flex w-full items-center rounded-xl px-4 py-3 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
@@ -416,133 +354,3 @@ export default function Navbar() {
     </nav>
   );
 }
-//*************number 2222
-// import { Link, NavLink, useNavigate } from "react-router-dom";
-// import freshCartLogo from "../../assets/FreshCartLogo.png";
-// import { Heart } from "lucide-react";
-// import { removeLocalStorageToken } from "../../utils/LocalStorage";
-// import { useContext } from "react";
-// import { AuthContext } from "../../contexts/AuthContext";
-// export default function Navbar() {
-
-//   const { token,setToken } = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   function logout() {
-//     setToken(null)
-//     removeLocalStorageToken();
-//     navigate("/login");
-//   }
-//   return (
-//     <>
-//       <nav className="bg-white fixed w-full z-20 top-0 inset-s-0 shadow-lg">
-//         <div className="md:max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-//           <Link to="/" className="flex items-center  space-x-3 rtl:space-x-reverse">
-//             <img src={freshCartLogo} className="w-7 h-7" alt="freshCartLogo" />
-//             <span className="self-center text-xl text-heading font-semibold whitespace-nowrap">
-//               Fresh Cart
-//             </span>
-//           </Link>
-//           <button
-//             data-collapse-toggle="navbar-default"
-//             type="button"
-//             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
-//             aria-controls="navbar-default"
-//             aria-expanded="false"
-//           >
-//             <span className="sr-only">Open main menu</span>
-//             <svg
-//               className="w-6 h-6"
-//               aria-hidden="true"
-//               xmlns="http://www.w3.org/2000/svg"
-//               width={24}
-//               height={24}
-//               fill="none"
-//               viewBox="0 0 24 24"
-//             >
-//               <path
-//                 stroke="currentColor"
-//                 strokeLinecap="round"
-//                 strokeWidth={2}
-//                 d="M5 7h14M5 12h14M5 17h14"
-//               />
-//             </svg>
-//           </button>
-//           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-//             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
-//               <li>
-//                 <NavLink
-//                   to="/products"
-//                   className="block py-2 px-3 text-heading bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
-//                   aria-current="page"
-//                 >
-//                   Products
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/categories"
-//                   className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-//                 >
-//                   Categories
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/brands"
-//                   className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-//                 >
-//                   Brands
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/allorders"
-//                   className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-//                 >
-//                   All Orders
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink to="/wishList" aria-label="Wishlist">
-//                   {({ isActive }) => (
-//                     <Heart
-//                       className="h-5 w-5 transition-colors"
-//                       fill={isActive ? "red" : "none"}
-//                       stroke={isActive ? "red" : "currentColor"}
-//                     />
-//                   )}
-//                 </NavLink>
-//               </li>
-//             </ul>
-//           </div>
-//           <div>
-//             {token ? (
-//               <button
-//                 className="text-red-800 cursor-pointer md:text-xl font-bold hover:text-red-500"
-//                 onClick={logout}
-//               >
-//                 LogOut
-//               </button>
-//             ) : (
-//               <div className="md:flex hidden  items-center gap-3 justify-between">
-//                 <Link
-//                   className="text-white hover:text-primary-light p-2 bg-primary-dark rounded-2xl"
-//                   to={"/login"}
-//                 >
-//                   Login
-//                 </Link>
-//                 <Link
-//                   className="text-white hover:text-primary-light p-2 bg-primary-dark rounded-2xl"
-//                   to={"/register"}
-//                 >
-//                   SignUp
-//                 </Link>
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//       </nav>
-//     </>
-//   );
-// }

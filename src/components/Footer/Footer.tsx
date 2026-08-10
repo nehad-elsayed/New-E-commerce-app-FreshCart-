@@ -11,7 +11,7 @@ const footerLinks = {
     { label: "My Cart", path: "/cart" },
     { label: "Wishlist", path: "/wishList" },
     { label: "My Orders", path: "/allorders" },
-    { label: "Profile", path: "/profile" },
+   
   ],
   Help: [
     { label: "FAQs", path: "/" },
