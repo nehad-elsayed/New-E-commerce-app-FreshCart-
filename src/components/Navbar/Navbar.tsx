@@ -5,6 +5,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { removeLocalStorageToken } from "../../utils/LocalStorage";
 import useCartProducts from "../../hooks/useCartProducts";
+import { useWishlistProducts } from "../../hooks/useToggleWishlist";
 
 const navigationMenu = [
   { path: "/", label: "Home" },
@@ -94,13 +95,12 @@ function CartBadge() {
   return <Badge count={cartProducts?.numOfCartItems ?? 0} />;
 }
 
-interface NavbarProps {
-  initialLoggedIn?: boolean;
-  wishlistCount?: number;
-  userAvatar?: string;
+function WishlistBadge() {
+  const { data: wishlist } = useWishlistProducts();
+  return <Badge count={wishlist?.count ?? 0} />;
 }
 
-export default function Navbar({ wishlistCount = 5 }: NavbarProps) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { token, setToken } = useContext(AuthContext) as {
@@ -199,7 +199,7 @@ export default function Navbar({ wishlistCount = 5 }: NavbarProps) {
                 aria-label="Wishlist"
               >
                 <HeartIcon className="h-5 w-5" />
-                <Badge count={wishlistCount} />
+                <WishlistBadge />
               </NavLink>
 
               {/* Cart */}
@@ -281,8 +281,8 @@ export default function Navbar({ wishlistCount = 5 }: NavbarProps) {
                 className="relative rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-primary"
                 aria-label="Wishlist"
               >
-                <HeartIcon className="h-5 w-5 `${isActive?}`" />
-                <Badge count={wishlistCount} />
+                <HeartIcon className="h-5 w-5" />
+                <WishlistBadge />
               </NavLink>
               <NavLink
                 to="/cart"

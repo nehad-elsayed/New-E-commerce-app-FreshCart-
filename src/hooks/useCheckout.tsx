@@ -23,12 +23,14 @@ export default function useCheckout() {
         return;
       }
       toast.error("Payment page is unavailable. Please try again.", {
+        toastId: "checkout-unavailable",
         position: "bottom-right",
         autoClose: 2000,
       });
     },
     onError: () => {
       toast.error("Checkout failed, please try again.", {
+        toastId: "checkout-error",
         position: "bottom-right",
         autoClose: 2000,
       });

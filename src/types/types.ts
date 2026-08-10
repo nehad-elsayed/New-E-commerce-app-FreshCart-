@@ -41,6 +41,12 @@ export interface Product {
   updatedAt: string;
   id: string;
 }
+
+export interface WishlistResponse {
+  status: string;
+  count: number;
+  data: Product[];
+}
 export interface Subcategory {
   _id: string;
   name: string;

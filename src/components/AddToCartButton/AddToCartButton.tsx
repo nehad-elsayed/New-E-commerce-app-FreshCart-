@@ -7,7 +7,7 @@ export default function AddToCartButton({
   productId: string;
   className?: string;
 }) {
-  const { mutate: addToCart, isPending } = useAddToCart();
+  const { mutate: addToCart, isPending  } = useAddToCart();
 
   return (
     <button

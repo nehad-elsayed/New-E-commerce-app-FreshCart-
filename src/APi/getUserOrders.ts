@@ -18,5 +18,6 @@ export async function getUserOrders(): Promise<UserOrder[]> {
     },
   );
 
-  return Array.isArray(data) ? data : [];
+  const orders = Array.isArray(data) ? data : [];
+  return [...orders].reverse();
 }

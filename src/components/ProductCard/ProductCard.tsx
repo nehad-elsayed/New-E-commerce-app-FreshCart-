@@ -33,7 +33,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </Link>
 
         <div className="absolute right-3 top-3">
-          <AddToWishlistButton />
+          <AddToWishlistButton productId={product._id} />
         </div>
 
         {product.category?.name && (

@@ -1,14 +1,32 @@
-export default function AddToWishlistButton() {
+import { useToggleWishlist } from "../../hooks/useToggleWishlist";
+
+export default function AddToWishlistButton({
+  productId,
+  className = "",
+}: {
+  productId: string;
+  className?: string;
+}) {
+  const { isInWishlist, isPending, toggleWishlist } = useToggleWishlist(productId);
+
   return (
     <button
       type="button"
-      aria-label="Add to wishlist"
-      className="flex h-9 cursor-pointer w-9 items-center justify-center rounded-full bg-white/90 text-gray-400 shadow-sm backdrop-blur-sm transition hover:bg-white hover:text-red-500"
+      aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
+      disabled={isPending}
+      onClick={toggleWishlist}
+      className={[
+        "flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-sm transition disabled:opacity-60",
+        isInWishlist
+          ? "text-red-500 hover:bg-red-50"
+          : "text-gray-400 hover:bg-white hover:text-red-500",
+        className,
+      ].join(" ")}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="none"
+        fill={isInWishlist ? "currentColor" : "none"}
         stroke="currentColor"
         strokeWidth={1.75}
         strokeLinecap="round"

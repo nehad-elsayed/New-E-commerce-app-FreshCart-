@@ -122,7 +122,7 @@ export default function ProductDetails() {
                 {product.title}
               </h1>
             </div>
-            <AddToWishlistButton />
+            <AddToWishlistButton productId={product._id} />
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">

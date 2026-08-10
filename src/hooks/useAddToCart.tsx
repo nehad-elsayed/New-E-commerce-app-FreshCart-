@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AddToCart } from "../APi/AddToCart";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function useAddToCart() {
   const queryClient = useQueryClient();
+const navigate = useNavigate()
 
   return useMutation({
     mutationKey: ["addToCart"],
@@ -16,11 +18,13 @@ export default function useAddToCart() {
       });
     },
     onError: () => {
-      toast.error("Failed to add product, please try again!", {
+      toast.error("Failed to add product, please login frist and  try again!", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 4000,
       
       });
+
+      navigate("/login")
 
     },
 
